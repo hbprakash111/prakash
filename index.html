@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ಪ್ರಕಾಶ್ - ಅಂಕಗಳ ಆ್ಯಪ್</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f5f9;
+    color: #222;
+}
+
+header {
+    background: #1976d2;
+    color: white;
+    text-align: center;
+    padding: 18px 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.container {
+    padding: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.add-btn {
+    background: #2e7d32;
+    color: white;
+}
+
+.save-btn {
+    background: #1976d2;
+    color: white;
+}
+
+.delete-btn {
+    background: #d32f2f;
+    color: white;
+}
+
+.edit-btn {
+    background: #f9a825;
+    color: white;
+}
+
+.table-box {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+    background: white;
+}
+
+th {
+    background: #1565c0;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+td input {
+    width: 90px;
+    text-align: center;
+}
+
+.converted {
+    font-weight: bold;
+    color: #1976d2;
+}
+
+.total {
+    background: #e3f2fd;
+    font-weight: bold;
+}
+
+.message {
+    text-align: center;
+    padding: 8px;
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+@media(max-width:600px) {
+    header h1 {
+        font-size: 21px;
+    }
+
+    .container {
+        padding: 8px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 9px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>📚 ಪ್ರಕಾಶ್ - ಅಂಕಗಳ ಆ್ಯಪ್</h1>
+    <p>ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ಸುಲಭವಾಗಿ ದಾಖಲಿಸಿ</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h3>➕ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ</h3>
+
+        <input type="text" id="studentName"
+               placeholder="ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು">
+
+        <input type="number" id="marks50"
+               placeholder="50ಕ್ಕೆ ಪಡೆದ ಅಂಕ"
+               min="0" max="50">
+
+        <button class="add-btn" onclick="addStudent()">
+            + ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ
+        </button>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <div class="card">
+        <h3>📋 ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಪಟ್ಟಿ</h3>
+
+        <div class="table-box">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ಕ್ರ.</th>
+                    <th>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th>
+                    <th>50ಕ್ಕೆ ಅಂಕ</th>
+                    <th>20ಕ್ಕೆ ಪರಿವರ್ತನೆ</th>
+                    <th>ಶೇಕಡಾವಾರು</th>
+                    <th>ತಿದ್ದುಪಡಿ</th>
+                    <th>ಅಳಿಸಿ</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentTable">
+            </tbody>
+
+            <tfoot>
+                <tr class="total">
+                    <td colspan="2">ಒಟ್ಟು</td>
+                    <td id="total50">0</td>
+                    <td id="total20">0</td>
+                    <td id="average">0%</td>
+                    <td colspan="2"></td>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+let students = [];
+
+/* ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸುವುದು */
+function addStudent() {
+
+    let name = document.getElementById("studentName").value.trim();
+    let marks = Number(document.getElementById("marks50").value);
+
+    if (name === "") {
+        alert("ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.");
+        return;
+    }
+
+    if (marks < 0 || marks > 50 || isNaN(marks)) {
+        alert("50ರ ಒಳಗಿನ ಸರಿಯಾದ ಅಂಕವನ್ನು ನಮೂದಿಸಿ.");
+        return;
+    }
+
+    students.push({
+        name: name,
+        marks: marks
+    });
+
+    document.getElementById("studentName").value = "";
+    document.getElementById("marks50").value = "";
+
+    showMessage("ವಿದ್ಯಾರ್ಥಿ ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ.");
+
+    displayStudents();
+}
+
+
+/* ಪಟ್ಟಿಯನ್ನು ತೋರಿಸುವುದು */
+function displayStudents() {
+
+    let table = document.getElementById("studentTable");
+
+    table.innerHTML = "";
+
+    let total50 = 0;
+    let total20 = 0;
+
+    students.forEach(function(student, index) {
+
+        let converted = (student.marks * 20) / 50;
+
+        let percentage = (student.marks / 50) * 100;
+
+        total50 += student.marks;
+        total20 += converted;
+
+        let row = `
+        <tr>
+
+            <td>${index + 1}</td>
+
+            <td>
+                <input type="text"
+                       id="name${index}"
+                       value="${student.name}">
+            </td>
+
+            <td>
+                <input type="number"
+                       id="marks${index}"
+                       value="${student.marks}"
+                       min="0"
+                       max="50"
+                       onchange="updateMarks(${index})">
+            </td>
+
+            <td class="converted">
+                ${converted.toFixed(1)}
+            </td>
+
+            <td>
+                ${percentage.toFixed(1)}%
+            </td>
+
+            <td>
+                <button class="edit-btn"
+                        onclick="editStudent(${index})">
+                    ✏️ ತಿದ್ದು
+                </button>
+            </td>
+
+            <td>
+                <button class="delete-btn"
+                        onclick="deleteStudent(${index})">
+                    🗑️ ಅಳಿಸಿ
+                </button>
+            </td>
+
+        </tr>
+        `;
+
+        table.innerHTML += row;
+    });
+
+    document.getElementById("total50").innerText =
+        total50.toFixed(1);
+
+    document.getElementById("total20").innerText =
+        total20.toFixed(1);
+
+    let average = students.length > 0
+        ? (total50 / (students.length * 50)) * 100
+        : 0;
+
+    document.getElementById("average").innerText =
+        average.toFixed(1) + "%";
+}
+
+
+/* ಅಂಕ ಬದಲಿಸಿದಾಗ */
+function updateMarks(index) {
+
+    let marks = Number(
+        document.getElementById("marks" + index).value
+    );
+
+    if (marks < 0) marks = 0;
+    if (marks > 50) marks = 50;
+
+    students[index].marks = marks;
+
+    displayStudents();
+}
+
+
+/* ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು/ಅಂಕ ತಿದ್ದುಪಡಿ */
+function editStudent(index) {
+
+    let newName =
+        document.getElementById("name" + index).value.trim();
+
+    let newMarks =
+        Number(document.getElementById("marks" + index).value);
+
+    if (newName === "") {
+        alert("ಹೆಸರನ್ನು ಖಾಲಿ ಬಿಡಬೇಡಿ.");
+        return;
+    }
+
+    if (newMarks < 0 || newMarks > 50) {
+        alert("ಅಂಕ 0 ರಿಂದ 50ರ ನಡುವೆ ಇರಬೇಕು.");
+        return;
+    }
+
+    students[index].name = newName;
+    students[index].marks = newMarks;
+
+    showMessage("ವಿದ್ಯಾರ್ಥಿಯ ಮಾಹಿತಿ ತಿದ್ದುಪಡಿ ಮಾಡಲಾಗಿದೆ.");
+
+    displayStudents();
+}
+
+
+/* ವಿದ್ಯಾರ್ಥಿ ಅಳಿಸುವುದು */
+function deleteStudent(index) {
+
+    if (confirm("ಈ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಅಳಿಸಬೇಕೇ?")) {
+
+        students.splice(index, 1);
+
+        showMessage("ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಅಳಿಸಲಾಗಿದೆ.");
+
+        displayStudents();
+    }
+}
+
+
+/* ಸಂದೇಶ */
+function showMessage(text) {
+
+    let message = document.getElementById("message");
+
+    message.innerText = text;
+
+    setTimeout(function() {
+        message.innerText = "";
+    }, 2000);
+}
+
+</script>
+
+</body>
+</html>
