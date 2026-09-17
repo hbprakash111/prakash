@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CCE Marks Entry App</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, "Noto Sans Kannada", sans-serif;
+    background: #f3f6f9;
+    color: #222;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+}
+
+.header {
+    background: #174a7e;
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.header h1 {
+    margin: 0 0 6px;
+    font-size: 25px;
+}
+
+.header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.controls {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 7px;
+    font-size: 15px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #4c91d9;
+}
+
+.info {
+    margin-top: 12px;
+    padding: 10px;
+    background: #eef5ff;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+button {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #174a7e;
+    color: white;
+}
+
+.btn-success {
+    background: #258a50;
+    color: white;
+}
+
+.btn-danger {
+    background: #c62828;
+    color: white;
+}
+
+.btn-warning {
+    background: #e69b00;
+    color: white;
+}
+
+.btn-print {
+    background: #444;
+    color: white;
+}
+
+.table-box {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    overflow-x: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th {
+    background: #174a7e;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+td input {
+    min-width: 80px;
+    text-align: center;
+}
+
+.student-name {
+    text-align: left;
+    min-width: 180px;
+}
+
+.grade {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.converted {
+    font-weight: bold;
+}
+
+.actions button {
+    margin: 2px;
+    padding: 7px 10px;
+}
+
+.error {
+    color: #c62828;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.grade-info {
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.grade-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 7px;
+}
+
+.grade-box {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.empty {
+    padding: 25px;
+    text-align: center;
+    color: #777;
+}
+
+@media(max-width:600px) {
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .container {
+        padding: 8px;
+    }
+
+    button {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+    }
+
+    .controls,
+    .buttons,
+    .actions,
+    .grade-info {
+        display: none !important;
+    }
+
+    .header {
+        color: black;
+        background: white;
+        border: 1px solid #333;
+    }
+
+    .table-box {
+        box-shadow: none;
+    }
+
+    table {
+        min-width: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>CCE Marks Entry App</h1>
+        <p>20 ಅಂಕಗಳಿಂದ 15 / 10 ಅಂಕಗಳಿಗೆ ಸ್ವಯಂಚಾಲಿತ ಪರಿವರ್ತನೆ</p>
+    </div>
+
+    <div class="controls">
+
+        <div class="control-grid">
+
+            <div>
+                <label>ತರಗತಿ ಆಯ್ಕೆಮಾಡಿ</label>
+                <select id="classSelect" onchange="changeClass()">
+                    <option value="1">1ನೇ ತರಗತಿ</option>
+                    <option value="2">2ನೇ ತರಗತಿ</option>
+                    <option value="3">3ನೇ ತರಗತಿ</option>
+                    <option value="4">4ನೇ ತರಗತಿ</option>
+                    <option value="5">5ನೇ ತರಗತಿ</option>
+                    <option value="6">6ನೇ ತರಗತಿ</option>
+                    <option value="7">7ನೇ ತರಗತಿ</option>
+                    <option value="8">8ನೇ ತರಗತಿ</option>
+                </select>
+            </div>
+
+            <div>
+                <label>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</label>
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="ಹೆಸರು ನಮೂದಿಸಿ">
+            </div>
+
+            <div>
+                <label>20 ಅಂಕಗಳಲ್ಲಿ ಪಡೆದ ಅಂಕ</label>
+                <input
+                    type="number"
+                    id="originalMarks"
+                    min="0"
+                    max="20"
+                    step="0.01"
+                    placeholder="0 - 20">
+            </div>
+
+        </div>
+
+        <div class="info" id="conversionInfo"></div>
+
+        <div class="buttons">
+            <button class="btn-primary" onclick="addStudent()">
+                + ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ
+            </button>
+
+            <button class="btn-success" onclick="exportCSV()">
+                CSV Export
+            </button>
+
+            <button class="btn-print" onclick="window.print()">
+                Print
+            </button>
+
+            <button class="btn-danger" onclick="clearAll()">
+                ಎಲ್ಲಾ ಅಳಿಸಿ
+            </button>
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <label>ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಹುಡುಕಿ</label>
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು ಹುಡುಕಿ..."
+            oninput="renderTable()">
+    </div>
+
+    <div class="table-box">
+
+        <table id="marksTable">
+
+            <thead>
+                <tr>
+                    <th>Sl.No</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Original Marks /20</th>
+                    <th id="convertedHeading">Converted /15</th>
+                    <th>Grade</th>
+                    <th class="actions">Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="tableBody"></tbody>
+
+        </table>
+
+        <div id="emptyMessage" class="empty">
+            ಇನ್ನೂ ಯಾವುದೇ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ.
+        </div>
+
+    </div>
+
+    <div class="grade-info">
+
+        <h3>CCE Grade Scale</h3>
+
+        <div id="gradeScale" class="grade-grid"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+let students = [];
+
+let editingIndex = -1;
+
+
+/* ==========================================
+   CLASS CONFIGURATION
+========================================== */
+
+function getClassConfig(classNumber) {
+
+    classNumber = Number(classNumber);
+
+    if (classNumber >= 1 && classNumber <= 5) {
+
+        return {
+            maxMarks: 15,
+            gradeScale: [
+                { min: 14, grade: "A+" },
+                { min: 11, grade: "A" },
+                { min: 8, grade: "B+" },
+                { min: 6.5, grade: "B" },
+                { min: 0, grade: "C" }
+            ]
+        };
+
+    }
+
+    return {
+        maxMarks: 10,
+        gradeScale: [
+            { min: 9.5, grade: "A+" },
+            { min: 7.5, grade: "A" },
+            { min: 5.5, grade: "B+" },
+            { min: 4.5, grade: "B" },
+            { min: 0, grade: "C" }
+        ]
+    };
+}
+
+
+/* ==========================================
+   CONVERT MARKS
+========================================== */
+
+function convertMarks(classNumber, marks) {
+
+    if (
+        marks === "" ||
+        marks === null ||
+        marks === undefined ||
+        isNaN(marks)
+    ) {
+        return "";
+    }
+
+    marks = Number(marks);
+
+    if (marks < 0 || marks > 20) {
+        return "";
+    }
+
+    const config = getClassConfig(classNumber);
+
+    const converted = (marks * config.maxMarks) / 20;
+
+    return roundMarks(converted);
+}
+
+
+/* ==========================================
+   ROUND MARKS
+========================================== */
+
+function roundMarks(value) {
+
+    return Number(value.toFixed(2));
+
+}
+
+
+/* ==========================================
+   CALCULATE GRADE
+========================================== */
+
+function calculateGrade(classNumber, convertedMarks) {
+
+    if (
+        convertedMarks === "" ||
+        convertedMarks === null ||
+        convertedMarks === undefined ||
+        isNaN(convertedMarks)
+    ) {
+        return "";
+    }
+
+    const config = getClassConfig(classNumber);
+
+    const mark = Number(convertedMarks);
+
+    for (let item of config.gradeScale) {
+
+        if (mark >= item.min) {
+            return item.grade;
+        }
+
+    }
+
+    return "C";
+}
+
+
+/* ==========================================
+   CHANGE CLASS
+========================================== */
+
+function changeClass() {
+
+    const classNumber =
+        Number(document.getElementById("classSelect").value);
+
+    const config = getClassConfig(classNumber);
+
+    document.getElementById("conversionInfo").innerHTML =
+        `ತರಗತಿ ${classNumber}: 20 ಅಂಕಗಳು → ${config.maxMarks} ಅಂಕಗಳು`;
+
+    document.getElementById("convertedHeading").innerText =
+        `Converted /${config.maxMarks}`;
+
+    showGradeScale();
+
+}
+
+
+/* ==========================================
+   SHOW GRADE SCALE
+========================================== */
+
+function showGradeScale() {
+
+    const classNumber =
+        Number(document.getElementById("classSelect").value);
+
+    const config = getClassConfig(classNumber);
+
+    const box =
+        document.getElementById("gradeScale");
+
+    box.innerHTML = "";
+
+    config.gradeScale.forEach((item, index) => {
+
+        let upper;
+
+        if (index === 0) {
+            upper = config.maxMarks;
+        } else {
+            upper = config.gradeScale[index - 1].min - 0.01;
+        }
+
+        box.innerHTML += `
+            <div class="grade-box">
+                ${item.min} – ${upper}
+                <br>
+                ${item.grade}
+            </div>
+        `;
+
+    });
+
+}
+
+
+/* ==========================================
+   VALIDATE MARKS
+========================================== */
+
+function validateMarks(marks) {
+
+    if (marks === "") {
+        return "ಅಂಕಗಳನ್ನು ನಮೂದಿಸಿ.";
+    }
+
+    marks = Number(marks);
+
+    if (isNaN(marks)) {
+        return "ದಯವಿಟ್ಟು ಸರಿಯಾದ ಅಂಕ ನಮೂದಿಸಿ.";
+    }
+
+    if (marks < 0) {
+        return "ಋಣಾತ್ಮಕ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಲಾಗುವುದಿಲ್ಲ.";
+    }
+
+    if (marks > 20) {
+        return "20ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಲಾಗುವುದಿಲ್ಲ.";
+    }
+
+    return "";
+}
+
+
+/* ==========================================
+   ADD STUDENT
+========================================== */
+
+function addStudent() {
+
+    const name =
+        document.getElementById("studentName").value.trim();
+
+    const classNumber =
+        Number(document.getElementById("classSelect").value);
+
+    const marks =
+        document.getElementById("originalMarks").value;
+
+    if (name === "") {
+        alert("ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.");
+        return;
+    }
+
+    const error = validateMarks(marks);
+
+    if (error) {
+        alert(error);
+        return;
+    }
+
+    const converted =
+        convertMarks(classNumber, marks);
+
+    const grade =
+        calculateGrade(classNumber, converted);
+
+    const student = {
+        name: name,
+        classNumber: classNumber,
+        original: Number(marks),
+        converted: converted,
+        grade: grade
+    };
+
+    if (editingIndex === -1) {
+
+        students.push(student);
+
+    } else {
+
+        students[editingIndex] = student;
+
+        editingIndex = -1;
+
+    }
+
+    saveData();
+    renderTable();
+    clearInputs();
+
+}
+
+
+/* ==========================================
+   EDIT STUDENT
+========================================== */
+
+function editStudent(index) {
+
+    const student = students[index];
+
+    document.getElementById("studentName").value =
+        student.name;
+
+    document.getElementById("classSelect").value =
+        student.classNumber;
+
+    document.getElementById("originalMarks").value =
+        student.original;
+
+    editingIndex = index;
+
+    changeClass();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ==========================================
+   DELETE STUDENT
+========================================== */
+
+function deleteStudent(index) {
+
+    if (
+        !confirm("ಈ ವಿದ್ಯಾರ್ಥಿಯ ಮಾಹಿತಿಯನ್ನು ಅಳಿಸಬೇಕೇ?")
+    ) {
+        return;
+    }
+
+    students.splice(index, 1);
+
+    saveData();
+    renderTable();
+
+}
+
+
+/* ==========================================
+   RENDER TABLE
+========================================== */
+
+function renderTable() {
+
+    const tbody =
+        document.getElementById("tableBody");
+
+    const search =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase();
+
+    tbody.innerHTML = "";
+
+    const filtered =
+        students.filter(student =>
+            student.name.toLowerCase().includes(search)
+        );
+
+    document.getElementById("emptyMessage").style.display =
+        filtered.length === 0 ? "block" : "none";
+
+    filtered.forEach((student, filteredIndex) => {
+
+        const actualIndex =
+            students.indexOf(student);
+
+        const config =
+            getClassConfig(student.classNumber);
+
+        tbody.innerHTML += `
+
+        <tr>
+
+            <td>${filteredIndex + 1}</td>
+
+            <td class="student-name">
+                ${escapeHTML(student.name)}
+            </td>
+
+            <td>${student.classNumber}</td>
+
+            <td>
+                <input
+                    type="number"
+                    min="0"
+                    max="20"
+                    step="0.01"
+                    value="${student.original}"
+                    onchange="updateMarks(${actualIndex}, this.value)">
+            </td>
+
+            <td class="converted">
+                ${student.converted}/${config.maxMarks}
+            </td>
+
+            <td class="grade">
+                ${student.grade}
+            </td>
+
+            <td class="actions">
+
+                <button
+                    class="btn-warning"
+                    onclick="editStudent(${actualIndex})">
+                    Edit
+                </button>
+
+                <button
+                    class="btn-danger"
+                    onclick="deleteStudent(${actualIndex})">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* ==========================================
+   UPDATE MARKS IN REAL TIME
+========================================== */
+
+function updateMarks(index, value) {
+
+    const error = validateMarks(value);
+
+    if (error) {
+
+        alert(error);
+
+        renderTable();
+
+        return;
+
+    }
+
+    const student = students[index];
+
+    student.original = Number(value);
+
+    student.converted =
+        convertMarks(
+            student.classNumber,
+            student.original
+        );
+
+    student.grade =
+        calculateGrade(
+            student.classNumber,
+            student.converted
+        );
+
+    saveData();
+    renderTable();
+
+}
+
+
+/* ==========================================
+   CLEAR INPUTS
+========================================== */
+
+function clearInputs() {
+
+    document.getElementById("studentName").value = "";
+    document.getElementById("originalMarks").value = "";
+
+    editingIndex = -1;
+
+}
+
+
+/* ==========================================
+   LOCAL STORAGE
+========================================== */
+
+function saveData() {
+
+    localStorage.setItem(
+        "CCE_Marks_Data",
+        JSON.stringify(students)
+    );
+
+}
+
+
+function loadData() {
+
+    const data =
+        localStorage.getItem("CCE_Marks_Data");
+
+    if (data) {
+
+        try {
+
+            students = JSON.parse(data);
+
+        } catch (error) {
+
+            students = [];
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================
+   CLEAR ALL
+========================================== */
+
+function clearAll() {
+
+    if (
+        !confirm(
+            "ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿಗಳ ಮಾಹಿತಿಯನ್ನು ಅಳಿಸಬೇಕೇ?"
+        )
+    ) {
+        return;
+    }
+
+    students = [];
+
+    localStorage.removeItem("CCE_Marks_Data");
+
+    renderTable();
+
+}
+
+
+/* ==========================================
+   CSV EXPORT
+========================================== */
+
+function exportCSV() {
+
+    if (students.length === 0) {
+
+        alert("Export ಮಾಡಲು ಯಾವುದೇ data ಇಲ್ಲ.");
+
+        return;
+
+    }
+
+    let csv =
+        "Sl.No,Student Name,Class,Original Marks /20,Converted Marks,Grade\n";
+
+    students.forEach((student, index) => {
+
+        const config =
+            getClassConfig(student.classNumber);
+
+        csv +=
+            `${index + 1},"${student.name}",${student.classNumber},${student.original},${student.converted}/${config.maxMarks},${student.grade}\n`;
+
+    });
+
+    const blob =
+        new Blob(
+            ["\ufeff" + csv],
+            { type: "text/csv;charset=utf-8;" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const link =
+        document.createElement("a");
+
+    link.href = url;
+    link.download = "CCE_Marks_Report.csv";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* ==========================================
+   SECURITY / HTML ESCAPE
+========================================== */
+
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   INITIALIZE
+========================================== */
+
+loadData();
+
+changeClass();
+
+renderTable();
+
+</script>
+
+</body>
+</html>
