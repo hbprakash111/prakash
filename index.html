@@ -8,6 +8,10 @@
 
 <style>
 
+/* ================================
+   BASIC
+================================ */
+
 *{
     box-sizing:border-box;
 }
@@ -20,12 +24,15 @@ body{
 }
 
 .container{
-    max-width:1250px;
+    max-width:1300px;
     margin:auto;
     padding:15px;
 }
 
-/* HEADER */
+
+/* ================================
+   HEADER
+================================ */
 
 .header{
     background:#174a7e;
@@ -38,7 +45,7 @@ body{
 
 .header h1{
     margin:0 0 8px;
-    font-size:26px;
+    font-size:27px;
 }
 
 .header p{
@@ -47,7 +54,9 @@ body{
 }
 
 
-/* CARD */
+/* ================================
+   CARD
+================================ */
 
 .card{
     background:white;
@@ -58,7 +67,9 @@ body{
 }
 
 
-/* INPUT GRID */
+/* ================================
+   INPUT GRID
+================================ */
 
 .input-grid{
     display:grid;
@@ -77,18 +88,20 @@ input,
 select{
     width:100%;
     padding:11px;
-    border:1px solid #bbb;
+    border:1px solid #aaa;
     border-radius:7px;
     font-size:15px;
 }
 
 input:focus,
 select:focus{
-    outline:2px solid #5b9bd5;
+    outline:2px solid #4d90d9;
 }
 
 
-/* INFORMATION */
+/* ================================
+   INFO
+================================ */
 
 .info{
     margin-top:12px;
@@ -99,7 +112,9 @@ select:focus{
 }
 
 
-/* BUTTONS */
+/* ================================
+   BUTTONS
+================================ */
 
 .buttons{
     margin-top:12px;
@@ -109,8 +124,8 @@ select:focus{
 }
 
 button{
+    border:none;
     padding:10px 15px;
-    border:0;
     border-radius:7px;
     cursor:pointer;
     font-weight:bold;
@@ -147,8 +162,15 @@ button{
     color:white;
 }
 
+.btn-sort{
+    background:#6c5ce7;
+    color:white;
+}
 
-/* TABLE */
+
+/* ================================
+   TABLE
+================================ */
 
 .table-container{
     overflow-x:auto;
@@ -157,7 +179,7 @@ button{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:850px;
+    min-width:900px;
 }
 
 th{
@@ -165,6 +187,7 @@ th{
     color:white;
     padding:11px;
     border:1px solid #ddd;
+    white-space:nowrap;
 }
 
 td{
@@ -179,7 +202,7 @@ td{
 }
 
 .mark-input{
-    width:90px;
+    width:85px;
     text-align:center;
     padding:8px;
 }
@@ -199,11 +222,9 @@ td{
 }
 
 
-/* GRADE SCALE */
-
-.grade-title{
-    margin-top:0;
-}
+/* ================================
+   GRADE SCALE
+================================ */
 
 .grade-grid{
     display:grid;
@@ -221,7 +242,9 @@ td{
 }
 
 
-/* EMPTY */
+/* ================================
+   EMPTY MESSAGE
+================================ */
 
 .empty{
     padding:25px;
@@ -230,7 +253,9 @@ td{
 }
 
 
-/* MOBILE */
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:600px){
 
@@ -253,7 +278,9 @@ td{
 }
 
 
-/* PRINT */
+/* ================================
+   PRINT
+================================ */
 
 @media print{
 
@@ -290,25 +317,32 @@ td{
 <div class="container">
 
 
-<!-- HEADER -->
+<!-- =================================
+     HEADER
+================================= -->
 
 <div class="header">
 
-    <h1>CCE Marks Entry App</h1>
+    <h1>
+        CCE Marks Entry App
+    </h1>
 
     <p>
         20 ಅಂಕಗಳಿಂದ 15 / 10 ಅಂಕಗಳಿಗೆ
-        ಸ್ವಯಂಚಾಲಿತ ಅಂಕ ಪರಿವರ್ತನೆ ಮತ್ತು CCE Grade
+        ಸ್ವಯಂಚಾಲಿತ ಪರಿವರ್ತನೆ ಮತ್ತು CCE Grade
     </p>
 
 </div>
 
 
-<!-- INPUT SECTION -->
+<!-- =================================
+     STUDENT ENTRY
+================================= -->
 
 <div class="card no-print">
 
     <div class="input-grid">
+
 
         <!-- CLASS -->
 
@@ -322,14 +356,37 @@ td{
                 id="classSelect"
                 onchange="classChanged()">
 
-                <option value="1">1ನೇ ತರಗತಿ</option>
-                <option value="2">2ನೇ ತರಗತಿ</option>
-                <option value="3">3ನೇ ತರಗತಿ</option>
-                <option value="4">4ನೇ ತರಗತಿ</option>
-                <option value="5">5ನೇ ತರಗತಿ</option>
-                <option value="6">6ನೇ ತರಗತಿ</option>
-                <option value="7">7ನೇ ತರಗತಿ</option>
-                <option value="8">8ನೇ ತರಗತಿ</option>
+                <option value="1">
+                    1ನೇ ತರಗತಿ
+                </option>
+
+                <option value="2">
+                    2ನೇ ತರಗತಿ
+                </option>
+
+                <option value="3">
+                    3ನೇ ತರಗತಿ
+                </option>
+
+                <option value="4">
+                    4ನೇ ತರಗತಿ
+                </option>
+
+                <option value="5">
+                    5ನೇ ತರಗತಿ
+                </option>
+
+                <option value="6">
+                    6ನೇ ತರಗತಿ
+                </option>
+
+                <option value="7">
+                    7ನೇ ತರಗತಿ
+                </option>
+
+                <option value="8">
+                    8ನೇ ತರಗತಿ
+                </option>
 
             </select>
 
@@ -395,6 +452,15 @@ td{
 
 
         <button
+            class="btn-sort"
+            onclick="sortStudents()">
+
+            ಹೆಸರು Sort
+
+        </button>
+
+
+        <button
             class="btn-export"
             onclick="exportCSV()">
 
@@ -425,7 +491,9 @@ td{
 </div>
 
 
-<!-- SEARCH -->
+<!-- =================================
+     SEARCH
+================================= -->
 
 <div class="card no-print">
 
@@ -436,13 +504,15 @@ td{
     <input
         type="text"
         id="search"
-        placeholder="ಹೆಸರಿನಿಂದ ಹುಡುಕಿ..."
+        placeholder="ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು ಹುಡುಕಿ..."
         oninput="displayStudents()">
 
 </div>
 
 
-<!-- MARKS TABLE -->
+<!-- =================================
+     MARKS TABLE
+================================= -->
 
 <div class="card">
 
@@ -507,11 +577,13 @@ td{
 </div>
 
 
-<!-- GRADE SCALE -->
+<!-- =================================
+     CCE GRADE SCALE
+================================= -->
 
 <div class="card">
 
-    <h3 class="grade-title">
+    <h3>
         CCE Grade Scale
     </h3>
 
@@ -529,25 +601,30 @@ td{
 <script>
 
 
-/* =====================================================
-   STUDENT DATA
-===================================================== */
+/* =================================================
+   GLOBAL DATA
+================================================= */
 
 let students = [];
 
 let editIndex = -1;
 
+let sortAscending = true;
 
-/* =====================================================
+
+/* =================================================
    CLASS CONFIGURATION
-===================================================== */
+================================================= */
 
 function getConfig(classNumber){
 
     classNumber = Number(classNumber);
 
 
-    /* 1 ರಿಂದ 5ನೇ ತರಗತಿ */
+    /* ---------------------------------------------
+       1 ರಿಂದ 5ನೇ ತರಗತಿ
+       20 → 15
+    --------------------------------------------- */
 
     if(
         classNumber >= 1 &&
@@ -597,7 +674,10 @@ function getConfig(classNumber){
     }
 
 
-    /* 6 ರಿಂದ 8ನೇ ತರಗತಿ */
+    /* ---------------------------------------------
+       6 ರಿಂದ 8ನೇ ತರಗತಿ
+       20 → 10
+    --------------------------------------------- */
 
     return {
 
@@ -642,11 +722,11 @@ function getConfig(classNumber){
 }
 
 
-/* =====================================================
+/* =================================================
    CONVERT MARKS
-===================================================== */
+================================================= */
 
-function convertMarks(classNumber, marks){
+function convertMarks(classNumber,marks){
 
     if(
         marks === "" ||
@@ -679,7 +759,6 @@ function convertMarks(classNumber, marks){
 
     /*
        20 → 15
-       ಅಥವಾ
        20 → 10
     */
 
@@ -688,10 +767,9 @@ function convertMarks(classNumber, marks){
 
 
     /*
-       ದಶಮಾಂಶ ಬೇಡ.
-
+       ದಶಮಾಂಶ ತೆಗೆದು
        ಮುಂದಿನ ಪೂರ್ಣ ಸಂಖ್ಯೆಗೆ
-       Round Up ಮಾಡಲಾಗುತ್ತದೆ.
+       ಪರಿವರ್ತನೆ
     */
 
     return Math.ceil(converted);
@@ -699,9 +777,9 @@ function convertMarks(classNumber, marks){
 }
 
 
-/* =====================================================
+/* =================================================
    CCE GRADE
-===================================================== */
+================================================= */
 
 function calculateGrade(
     classNumber,
@@ -724,7 +802,9 @@ function calculateGrade(
         Number(convertedMarks);
 
 
-    /* 1 ರಿಂದ 5 */
+    /* ---------------------------------------------
+       1 ರಿಂದ 5ನೇ ತರಗತಿ
+    --------------------------------------------- */
 
     if(
         classNumber >= 1 &&
@@ -748,7 +828,9 @@ function calculateGrade(
     }
 
 
-    /* 6 ರಿಂದ 8 */
+    /* ---------------------------------------------
+       6 ರಿಂದ 8ನೇ ತರಗತಿ
+    --------------------------------------------- */
 
     if(
         classNumber >= 6 &&
@@ -777,9 +859,9 @@ function calculateGrade(
 }
 
 
-/* =====================================================
+/* =================================================
    CLASS CHANGE
-===================================================== */
+================================================= */
 
 function classChanged(){
 
@@ -798,6 +880,7 @@ function classChanged(){
     document.getElementById(
         "convertedTitle"
     ).innerText =
+
         "Converted Marks /" +
         config.maxMarks;
 
@@ -816,9 +899,9 @@ function classChanged(){
 }
 
 
-/* =====================================================
+/* =================================================
    SHOW GRADE SCALE
-===================================================== */
+================================================= */
 
 function showGradeScale(){
 
@@ -854,7 +937,7 @@ function showGradeScale(){
 
                     <br>
 
-                    Grade: ${item.grade}
+                    CCE Grade: ${item.grade}
 
                 </div>
 
@@ -866,9 +949,9 @@ function showGradeScale(){
 }
 
 
-/* =====================================================
-   ADD / UPDATE STUDENT
-===================================================== */
+/* =================================================
+   ADD STUDENT
+================================================= */
 
 function addStudent(){
 
@@ -892,7 +975,7 @@ function addStudent(){
         ).value;
 
 
-    /* NAME VALIDATION */
+    /* NAME */
 
     if(name === ""){
 
@@ -905,7 +988,7 @@ function addStudent(){
     }
 
 
-    /* MARK VALIDATION */
+    /* MARK EMPTY */
 
     if(marksValue === ""){
 
@@ -922,6 +1005,8 @@ function addStudent(){
         Number(marksValue);
 
 
+    /* INVALID */
+
     if(isNaN(marks)){
 
         alert(
@@ -932,6 +1017,8 @@ function addStudent(){
 
     }
 
+
+    /* NEGATIVE */
 
     if(marks < 0){
 
@@ -944,6 +1031,8 @@ function addStudent(){
     }
 
 
+    /* ABOVE 20 */
+
     if(marks > 20){
 
         alert(
@@ -955,9 +1044,7 @@ function addStudent(){
     }
 
 
-    /*
-       Converted Marks
-    */
+    /* CONVERT */
 
     const converted =
         convertMarks(
@@ -966,9 +1053,7 @@ function addStudent(){
         );
 
 
-    /*
-       CCE Grade
-    */
+    /* GRADE */
 
     const grade =
         calculateGrade(
@@ -1000,7 +1085,8 @@ function addStudent(){
 
     }
 
-    /* UPDATE */
+
+    /* EDIT */
 
     else{
 
@@ -1021,9 +1107,9 @@ function addStudent(){
 }
 
 
-/* =====================================================
+/* =================================================
    DISPLAY STUDENTS
-===================================================== */
+================================================= */
 
 function displayStudents(){
 
@@ -1108,12 +1194,14 @@ function displayStudents(){
                             max="20"
                             step="1"
                             value="${student.original}"
+
                             onchange="
                                 updateMarks(
                                     ${actualIndex},
                                     this.value
                                 )
                             "
+
                         >
 
                     </td>
@@ -1133,7 +1221,8 @@ function displayStudents(){
                     </td>
 
 
-                    <td class="action-cell no-print">
+                    <td
+                        class="action-cell no-print">
 
                         <button
                             class="btn-edit"
@@ -1172,9 +1261,9 @@ function displayStudents(){
 }
 
 
-/* =====================================================
-   UPDATE MARKS
-===================================================== */
+/* =================================================
+   REAL TIME MARK UPDATE
+================================================= */
 
 function updateMarks(index,value){
 
@@ -1237,9 +1326,9 @@ function updateMarks(index,value){
 }
 
 
-/* =====================================================
+/* =================================================
    EDIT STUDENT
-===================================================== */
+================================================= */
 
 function editStudent(index){
 
@@ -1265,7 +1354,8 @@ function editStudent(index){
         student.original;
 
 
-    editIndex = index;
+    editIndex =
+        index;
 
 
     classChanged();
@@ -1282,9 +1372,9 @@ function editStudent(index){
 }
 
 
-/* =====================================================
+/* =================================================
    DELETE STUDENT
-===================================================== */
+================================================= */
 
 function deleteStudent(index){
 
@@ -1312,9 +1402,43 @@ function deleteStudent(index){
 }
 
 
-/* =====================================================
+/* =================================================
+   SORT
+================================================= */
+
+function sortStudents(){
+
+    students.sort(
+        function(a,b){
+
+            const result =
+                a.name.localeCompare(
+                    b.name,
+                    "kn"
+                );
+
+            return sortAscending
+                ? result
+                : -result;
+
+        }
+    );
+
+
+    sortAscending =
+        !sortAscending;
+
+
+    saveData();
+
+    displayStudents();
+
+}
+
+
+/* =================================================
    DELETE ALL
-===================================================== */
+================================================= */
 
 function deleteAll(){
 
@@ -1342,9 +1466,9 @@ function deleteAll(){
 }
 
 
-/* =====================================================
+/* =================================================
    CLEAR INPUTS
-===================================================== */
+================================================= */
 
 function clearInputs(){
 
@@ -1363,9 +1487,9 @@ function clearInputs(){
 }
 
 
-/* =====================================================
+/* =================================================
    SAVE DATA
-===================================================== */
+================================================= */
 
 function saveData(){
 
@@ -1377,9 +1501,9 @@ function saveData(){
 }
 
 
-/* =====================================================
+/* =================================================
    LOAD DATA
-===================================================== */
+================================================= */
 
 function loadData(){
 
@@ -1409,9 +1533,9 @@ function loadData(){
 }
 
 
-/* =====================================================
+/* =================================================
    CSV EXPORT
-===================================================== */
+================================================= */
 
 function exportCSV(){
 
@@ -1464,7 +1588,7 @@ function exportCSV(){
             ],
             {
                 type:
-                    "text/csv;charset=utf-8;"
+                    "text/csv;charset=utf-8"
             }
         );
 
@@ -1473,24 +1597,25 @@ function exportCSV(){
         URL.createObjectURL(blob);
 
 
-    const a =
+    const link =
         document.createElement("a");
 
 
-    a.href = url;
+    link.href =
+        url;
 
 
-    a.download =
+    link.download =
         "CCE_Marks_Report.csv";
 
 
-    document.body.appendChild(a);
+    document.body.appendChild(link);
 
 
-    a.click();
+    link.click();
 
 
-    document.body.removeChild(a);
+    document.body.removeChild(link);
 
 
     URL.revokeObjectURL(url);
@@ -1498,9 +1623,9 @@ function exportCSV(){
 }
 
 
-/* =====================================================
+/* =================================================
    HTML SECURITY
-===================================================== */
+================================================= */
 
 function escapeHTML(text){
 
@@ -1534,9 +1659,9 @@ function escapeHTML(text){
 }
 
 
-/* =====================================================
-   START APP
-===================================================== */
+/* =================================================
+   START APPLICATION
+================================================= */
 
 loadData();
 
