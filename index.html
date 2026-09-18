@@ -4,400 +4,1545 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ಪ್ರಕಾಶ್ - ಅಂಕಗಳ ಆ್ಯಪ್</title>
+<title>CCE Marks Entry App</title>
 
 <style>
-* {
-    box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f2f5f9;
-    color: #222;
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Kannada",sans-serif;
+    background:#f3f6f9;
+    color:#222;
 }
 
-header {
-    background: #1976d2;
-    color: white;
-    text-align: center;
-    padding: 18px 10px;
+.container{
+    max-width:1250px;
+    margin:auto;
+    padding:15px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 25px;
+/* HEADER */
+
+.header{
+    background:#174a7e;
+    color:white;
+    padding:20px;
+    text-align:center;
+    border-radius:12px;
+    margin-bottom:15px;
 }
 
-header p {
-    margin: 5px 0 0;
-    font-size: 14px;
+.header h1{
+    margin:0 0 8px;
+    font-size:26px;
 }
 
-.container {
-    padding: 15px;
-    max-width: 1000px;
-    margin: auto;
+.header p{
+    margin:0;
+    font-size:15px;
 }
 
-.card {
-    background: white;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-bottom: 15px;
+
+/* CARD */
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
-input {
-    width: 100%;
-    padding: 11px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    font-size: 16px;
+
+/* INPUT GRID */
+
+.input-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(190px,1fr));
+    gap:12px;
 }
 
-button {
-    border: none;
-    border-radius: 7px;
-    padding: 10px 15px;
-    font-size: 15px;
-    cursor: pointer;
-    margin: 4px;
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:6px;
 }
 
-.add-btn {
-    background: #2e7d32;
-    color: white;
+input,
+select{
+    width:100%;
+    padding:11px;
+    border:1px solid #bbb;
+    border-radius:7px;
+    font-size:15px;
 }
 
-.save-btn {
-    background: #1976d2;
-    color: white;
+input:focus,
+select:focus{
+    outline:2px solid #5b9bd5;
 }
 
-.delete-btn {
-    background: #d32f2f;
-    color: white;
+
+/* INFORMATION */
+
+.info{
+    margin-top:12px;
+    padding:12px;
+    background:#eef5ff;
+    border-radius:8px;
+    font-weight:bold;
 }
 
-.edit-btn {
-    background: #f9a825;
-    color: white;
+
+/* BUTTONS */
+
+.buttons{
+    margin-top:12px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
 }
 
-.table-box {
-    overflow-x: auto;
+button{
+    padding:10px 15px;
+    border:0;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 650px;
-    background: white;
+.btn-add{
+    background:#174a7e;
+    color:white;
 }
 
-th {
-    background: #1565c0;
-    color: white;
-    padding: 10px;
+.btn-export{
+    background:#218838;
+    color:white;
 }
 
-td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+.btn-print{
+    background:#444;
+    color:white;
 }
 
-td input {
-    width: 90px;
-    text-align: center;
+.btn-delete-all{
+    background:#c62828;
+    color:white;
 }
 
-.converted {
-    font-weight: bold;
-    color: #1976d2;
+.btn-edit{
+    background:#e69b00;
+    color:white;
 }
 
-.total {
-    background: #e3f2fd;
-    font-weight: bold;
+.btn-delete{
+    background:#c62828;
+    color:white;
 }
 
-.message {
-    text-align: center;
-    padding: 8px;
-    color: #2e7d32;
-    font-weight: bold;
+
+/* TABLE */
+
+.table-container{
+    overflow-x:auto;
 }
 
-@media(max-width:600px) {
-    header h1 {
-        font-size: 21px;
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+
+th{
+    background:#174a7e;
+    color:white;
+    padding:11px;
+    border:1px solid #ddd;
+}
+
+td{
+    padding:8px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+.student-name{
+    text-align:left;
+    min-width:180px;
+}
+
+.mark-input{
+    width:90px;
+    text-align:center;
+    padding:8px;
+}
+
+.converted{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.grade{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.action-cell{
+    white-space:nowrap;
+}
+
+
+/* GRADE SCALE */
+
+.grade-title{
+    margin-top:0;
+}
+
+.grade-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(130px,1fr));
+    gap:8px;
+}
+
+.grade-item{
+    border:1px solid #ddd;
+    padding:10px;
+    border-radius:7px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
+/* EMPTY */
+
+.empty{
+    padding:25px;
+    text-align:center;
+    color:#777;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .container{
+        padding:8px;
     }
 
-    .container {
-        padding: 8px;
+    .header h1{
+        font-size:21px;
     }
 
-    button {
-        font-size: 14px;
-        padding: 9px 12px;
+    .header p{
+        font-size:13px;
     }
+
+    button{
+        width:100%;
+    }
+
 }
+
+
+/* PRINT */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    .no-print{
+        display:none !important;
+    }
+
+    .card{
+        box-shadow:none;
+    }
+
+    table{
+        min-width:0;
+    }
+
+    .header{
+        color:black;
+        background:white;
+        border:1px solid #333;
+    }
+
+}
+
 </style>
 </head>
 
-<body>
 
-<header>
-    <h1>📚 ಪ್ರಕಾಶ್ - ಅಂಕಗಳ ಆ್ಯಪ್</h1>
-    <p>ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ಸುಲಭವಾಗಿ ದಾಖಲಿಸಿ</p>
-</header>
+<body>
 
 <div class="container">
 
-    <div class="card">
-        <h3>➕ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಸೇರಿಸಿ</h3>
 
-        <input type="text" id="studentName"
-               placeholder="ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು">
+<!-- HEADER -->
 
-        <input type="number" id="marks50"
-               placeholder="50ಕ್ಕೆ ಪಡೆದ ಅಂಕ"
-               min="0" max="50">
+<div class="header">
 
-        <button class="add-btn" onclick="addStudent()">
-            + ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ
-        </button>
+    <h1>CCE Marks Entry App</h1>
 
-        <div id="message" class="message"></div>
-    </div>
+    <p>
+        20 ಅಂಕಗಳಿಂದ 15 / 10 ಅಂಕಗಳಿಗೆ
+        ಸ್ವಯಂಚಾಲಿತ ಅಂಕ ಪರಿವರ್ತನೆ ಮತ್ತು CCE Grade
+    </p>
 
-    <div class="card">
-        <h3>📋 ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಪಟ್ಟಿ</h3>
+</div>
 
-        <div class="table-box">
 
-        <table>
-            <thead>
-                <tr>
-                    <th>ಕ್ರ.</th>
-                    <th>ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು</th>
-                    <th>50ಕ್ಕೆ ಅಂಕ</th>
-                    <th>20ಕ್ಕೆ ಪರಿವರ್ತನೆ</th>
-                    <th>ಶೇಕಡಾವಾರು</th>
-                    <th>ತಿದ್ದುಪಡಿ</th>
-                    <th>ಅಳಿಸಿ</th>
-                </tr>
-            </thead>
+<!-- INPUT SECTION -->
 
-            <tbody id="studentTable">
-            </tbody>
+<div class="card no-print">
 
-            <tfoot>
-                <tr class="total">
-                    <td colspan="2">ಒಟ್ಟು</td>
-                    <td id="total50">0</td>
-                    <td id="total20">0</td>
-                    <td id="average">0%</td>
-                    <td colspan="2"></td>
-                </tr>
-            </tfoot>
+    <div class="input-grid">
 
-        </table>
+        <!-- CLASS -->
+
+        <div>
+
+            <label>
+                ತರಗತಿ
+            </label>
+
+            <select
+                id="classSelect"
+                onchange="classChanged()">
+
+                <option value="1">1ನೇ ತರಗತಿ</option>
+                <option value="2">2ನೇ ತರಗತಿ</option>
+                <option value="3">3ನೇ ತರಗತಿ</option>
+                <option value="4">4ನೇ ತರಗತಿ</option>
+                <option value="5">5ನೇ ತರಗತಿ</option>
+                <option value="6">6ನೇ ತರಗತಿ</option>
+                <option value="7">7ನೇ ತರಗತಿ</option>
+                <option value="8">8ನೇ ತರಗತಿ</option>
+
+            </select>
 
         </div>
+
+
+        <!-- STUDENT NAME -->
+
+        <div>
+
+            <label>
+                ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು
+            </label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು">
+
+        </div>
+
+
+        <!-- ORIGINAL MARKS -->
+
+        <div>
+
+            <label>
+                ಮೂಲ ಅಂಕ /20
+            </label>
+
+            <input
+                type="number"
+                id="marks20"
+                min="0"
+                max="20"
+                step="1"
+                placeholder="0 - 20">
+
+        </div>
+
+    </div>
+
+
+    <!-- CONVERSION INFORMATION -->
+
+    <div
+        class="info"
+        id="conversionInfo">
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+        <button
+            class="btn-add"
+            onclick="addStudent()">
+
+            + ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸಿ
+
+        </button>
+
+
+        <button
+            class="btn-export"
+            onclick="exportCSV()">
+
+            CSV Export
+
+        </button>
+
+
+        <button
+            class="btn-print"
+            onclick="window.print()">
+
+            Print
+
+        </button>
+
+
+        <button
+            class="btn-delete-all"
+            onclick="deleteAll()">
+
+            ಎಲ್ಲಾ Data ಅಳಿಸಿ
+
+        </button>
+
     </div>
 
 </div>
 
+
+<!-- SEARCH -->
+
+<div class="card no-print">
+
+    <label>
+        ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಹುಡುಕಿ
+    </label>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="ಹೆಸರಿನಿಂದ ಹುಡುಕಿ..."
+        oninput="displayStudents()">
+
+</div>
+
+
+<!-- MARKS TABLE -->
+
+<div class="card">
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Sl.No
+                    </th>
+
+                    <th>
+                        Student Name
+                    </th>
+
+                    <th>
+                        Class
+                    </th>
+
+                    <th>
+                        Original Marks /20
+                    </th>
+
+                    <th id="convertedTitle">
+                        Converted Marks /15
+                    </th>
+
+                    <th>
+                        CCE Grade
+                    </th>
+
+                    <th class="no-print">
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="studentTable">
+            </tbody>
+
+        </table>
+
+
+        <div
+            id="emptyMessage"
+            class="empty">
+
+            ಇನ್ನೂ ಯಾವುದೇ ವಿದ್ಯಾರ್ಥಿಯನ್ನು
+            ಸೇರಿಸಲಾಗಿಲ್ಲ.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GRADE SCALE -->
+
+<div class="card">
+
+    <h3 class="grade-title">
+        CCE Grade Scale
+    </h3>
+
+    <div
+        id="gradeScale"
+        class="grade-grid">
+    </div>
+
+</div>
+
+
+</div>
+
+
 <script>
+
+
+/* =====================================================
+   STUDENT DATA
+===================================================== */
 
 let students = [];
 
-/* ವಿದ್ಯಾರ್ಥಿ ಸೇರಿಸುವುದು */
-function addStudent() {
+let editIndex = -1;
 
-    let name = document.getElementById("studentName").value.trim();
-    let marks = Number(document.getElementById("marks50").value);
 
-    if (name === "") {
-        alert("ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ.");
-        return;
+/* =====================================================
+   CLASS CONFIGURATION
+===================================================== */
+
+function getConfig(classNumber){
+
+    classNumber = Number(classNumber);
+
+
+    /* 1 ರಿಂದ 5ನೇ ತರಗತಿ */
+
+    if(
+        classNumber >= 1 &&
+        classNumber <= 5
+    ){
+
+        return {
+
+            maxMarks:15,
+
+            grades:[
+
+                {
+                    min:14,
+                    label:"14 – 15",
+                    grade:"A+"
+                },
+
+                {
+                    min:11,
+                    label:"11 – 13",
+                    grade:"A"
+                },
+
+                {
+                    min:8,
+                    label:"8 – 10",
+                    grade:"B+"
+                },
+
+                {
+                    min:7,
+                    label:"7",
+                    grade:"B"
+                },
+
+                {
+                    min:0,
+                    label:"0 – 6",
+                    grade:"C"
+                }
+
+            ]
+
+        };
+
     }
 
-    if (marks < 0 || marks > 50 || isNaN(marks)) {
-        alert("50ರ ಒಳಗಿನ ಸರಿಯಾದ ಅಂಕವನ್ನು ನಮೂದಿಸಿ.");
-        return;
-    }
 
-    students.push({
-        name: name,
-        marks: marks
-    });
+    /* 6 ರಿಂದ 8ನೇ ತರಗತಿ */
 
-    document.getElementById("studentName").value = "";
-    document.getElementById("marks50").value = "";
+    return {
 
-    showMessage("ವಿದ್ಯಾರ್ಥಿ ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ.");
+        maxMarks:10,
 
-    displayStudents();
+        grades:[
+
+            {
+                min:10,
+                label:"10",
+                grade:"A+"
+            },
+
+            {
+                min:8,
+                label:"8 – 9",
+                grade:"A"
+            },
+
+            {
+                min:6,
+                label:"6 – 7",
+                grade:"B+"
+            },
+
+            {
+                min:5,
+                label:"5",
+                grade:"B"
+            },
+
+            {
+                min:0,
+                label:"0 – 4",
+                grade:"C"
+            }
+
+        ]
+
+    };
+
 }
 
 
-/* ಪಟ್ಟಿಯನ್ನು ತೋರಿಸುವುದು */
-function displayStudents() {
+/* =====================================================
+   CONVERT MARKS
+===================================================== */
 
-    let table = document.getElementById("studentTable");
+function convertMarks(classNumber, marks){
 
-    table.innerHTML = "";
+    if(
+        marks === "" ||
+        marks === null ||
+        marks === undefined
+    ){
 
-    let total50 = 0;
-    let total20 = 0;
+        return "";
 
-    students.forEach(function(student, index) {
+    }
 
-        let converted = (student.marks * 20) / 50;
 
-        let percentage = (student.marks / 50) * 100;
+    marks = Number(marks);
 
-        total50 += student.marks;
-        total20 += converted;
 
-        let row = `
-        <tr>
+    if(
+        isNaN(marks) ||
+        marks < 0 ||
+        marks > 20
+    ){
 
-            <td>${index + 1}</td>
+        return "";
 
-            <td>
-                <input type="text"
-                       id="name${index}"
-                       value="${student.name}">
-            </td>
+    }
 
-            <td>
-                <input type="number"
-                       id="marks${index}"
-                       value="${student.marks}"
-                       min="0"
-                       max="50"
-                       onchange="updateMarks(${index})">
-            </td>
 
-            <td class="converted">
-                ${converted.toFixed(1)}
-            </td>
+    const config =
+        getConfig(classNumber);
 
-            <td>
-                ${percentage.toFixed(1)}%
-            </td>
 
-            <td>
-                <button class="edit-btn"
-                        onclick="editStudent(${index})">
-                    ✏️ ತಿದ್ದು
-                </button>
-            </td>
+    /*
+       20 → 15
+       ಅಥವಾ
+       20 → 10
+    */
 
-            <td>
-                <button class="delete-btn"
-                        onclick="deleteStudent(${index})">
-                    🗑️ ಅಳಿಸಿ
-                </button>
-            </td>
+    const converted =
+        (marks * config.maxMarks) / 20;
 
-        </tr>
-        `;
 
-        table.innerHTML += row;
-    });
+    /*
+       ದಶಮಾಂಶ ಬೇಡ.
 
-    document.getElementById("total50").innerText =
-        total50.toFixed(1);
+       ಮುಂದಿನ ಪೂರ್ಣ ಸಂಖ್ಯೆಗೆ
+       Round Up ಮಾಡಲಾಗುತ್ತದೆ.
+    */
 
-    document.getElementById("total20").innerText =
-        total20.toFixed(1);
+    return Math.ceil(converted);
 
-    let average = students.length > 0
-        ? (total50 / (students.length * 50)) * 100
-        : 0;
-
-    document.getElementById("average").innerText =
-        average.toFixed(1) + "%";
 }
 
 
-/* ಅಂಕ ಬದಲಿಸಿದಾಗ */
-function updateMarks(index) {
+/* =====================================================
+   CCE GRADE
+===================================================== */
 
-    let marks = Number(
-        document.getElementById("marks" + index).value
+function calculateGrade(
+    classNumber,
+    convertedMarks
+){
+
+    if(
+        convertedMarks === "" ||
+        convertedMarks === null ||
+        convertedMarks === undefined ||
+        isNaN(convertedMarks)
+    ){
+
+        return "";
+
+    }
+
+
+    const mark =
+        Number(convertedMarks);
+
+
+    /* 1 ರಿಂದ 5 */
+
+    if(
+        classNumber >= 1 &&
+        classNumber <= 5
+    ){
+
+        if(mark >= 14)
+            return "A+";
+
+        if(mark >= 11)
+            return "A";
+
+        if(mark >= 8)
+            return "B+";
+
+        if(mark >= 7)
+            return "B";
+
+        return "C";
+
+    }
+
+
+    /* 6 ರಿಂದ 8 */
+
+    if(
+        classNumber >= 6 &&
+        classNumber <= 8
+    ){
+
+        if(mark >= 10)
+            return "A+";
+
+        if(mark >= 8)
+            return "A";
+
+        if(mark >= 6)
+            return "B+";
+
+        if(mark >= 5)
+            return "B";
+
+        return "C";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   CLASS CHANGE
+===================================================== */
+
+function classChanged(){
+
+    const classNumber =
+        Number(
+            document.getElementById(
+                "classSelect"
+            ).value
+        );
+
+
+    const config =
+        getConfig(classNumber);
+
+
+    document.getElementById(
+        "convertedTitle"
+    ).innerText =
+        "Converted Marks /" +
+        config.maxMarks;
+
+
+    document.getElementById(
+        "conversionInfo"
+    ).innerHTML =
+
+        `ತರಗತಿ ${classNumber}: ` +
+        `20 ಅಂಕಗಳು → ${config.maxMarks} ಅಂಕಗಳು ` +
+        `| ದಶಮಾಂಶವಿಲ್ಲದೆ ಮುಂದಿನ ಪೂರ್ಣ ಸಂಖ್ಯೆಗೆ ಪರಿವರ್ತನೆ`;
+
+
+    showGradeScale();
+
+}
+
+
+/* =====================================================
+   SHOW GRADE SCALE
+===================================================== */
+
+function showGradeScale(){
+
+    const classNumber =
+        Number(
+            document.getElementById(
+                "classSelect"
+            ).value
+        );
+
+
+    const config =
+        getConfig(classNumber);
+
+
+    const box =
+        document.getElementById(
+            "gradeScale"
+        );
+
+
+    box.innerHTML = "";
+
+
+    config.grades.forEach(
+        function(item){
+
+            box.innerHTML += `
+
+                <div class="grade-item">
+
+                    ${item.label}
+
+                    <br>
+
+                    Grade: ${item.grade}
+
+                </div>
+
+            `;
+
+        }
     );
 
-    if (marks < 0) marks = 0;
-    if (marks > 50) marks = 50;
-
-    students[index].marks = marks;
-
-    displayStudents();
 }
 
 
-/* ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು/ಅಂಕ ತಿದ್ದುಪಡಿ */
-function editStudent(index) {
+/* =====================================================
+   ADD / UPDATE STUDENT
+===================================================== */
 
-    let newName =
-        document.getElementById("name" + index).value.trim();
+function addStudent(){
 
-    let newMarks =
-        Number(document.getElementById("marks" + index).value);
+    const name =
+        document.getElementById(
+            "studentName"
+        ).value.trim();
 
-    if (newName === "") {
-        alert("ಹೆಸರನ್ನು ಖಾಲಿ ಬಿಡಬೇಡಿ.");
+
+    const classNumber =
+        Number(
+            document.getElementById(
+                "classSelect"
+            ).value
+        );
+
+
+    const marksValue =
+        document.getElementById(
+            "marks20"
+        ).value;
+
+
+    /* NAME VALIDATION */
+
+    if(name === ""){
+
+        alert(
+            "ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ."
+        );
+
         return;
+
     }
 
-    if (newMarks < 0 || newMarks > 50) {
-        alert("ಅಂಕ 0 ರಿಂದ 50ರ ನಡುವೆ ಇರಬೇಕು.");
+
+    /* MARK VALIDATION */
+
+    if(marksValue === ""){
+
+        alert(
+            "20 ಅಂಕಗಳಲ್ಲಿ ಪಡೆದ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಿ."
+        );
+
         return;
+
     }
 
-    students[index].name = newName;
-    students[index].marks = newMarks;
 
-    showMessage("ವಿದ್ಯಾರ್ಥಿಯ ಮಾಹಿತಿ ತಿದ್ದುಪಡಿ ಮಾಡಲಾಗಿದೆ.");
+    const marks =
+        Number(marksValue);
+
+
+    if(isNaN(marks)){
+
+        alert(
+            "ಸರಿಯಾದ ಅಂಕವನ್ನು ನಮೂದಿಸಿ."
+        );
+
+        return;
+
+    }
+
+
+    if(marks < 0){
+
+        alert(
+            "Negative marks ಅನುಮತಿಸಲಾಗುವುದಿಲ್ಲ."
+        );
+
+        return;
+
+    }
+
+
+    if(marks > 20){
+
+        alert(
+            "20ಕ್ಕಿಂತ ಹೆಚ್ಚಿನ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಲಾಗುವುದಿಲ್ಲ."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Converted Marks
+    */
+
+    const converted =
+        convertMarks(
+            classNumber,
+            marks
+        );
+
+
+    /*
+       CCE Grade
+    */
+
+    const grade =
+        calculateGrade(
+            classNumber,
+            converted
+        );
+
+
+    const student = {
+
+        name:name,
+
+        classNumber:classNumber,
+
+        original:marks,
+
+        converted:converted,
+
+        grade:grade
+
+    };
+
+
+    /* ADD */
+
+    if(editIndex === -1){
+
+        students.push(student);
+
+    }
+
+    /* UPDATE */
+
+    else{
+
+        students[editIndex] =
+            student;
+
+        editIndex = -1;
+
+    }
+
+
+    saveData();
 
     displayStudents();
+
+    clearInputs();
+
 }
 
 
-/* ವಿದ್ಯಾರ್ಥಿ ಅಳಿಸುವುದು */
-function deleteStudent(index) {
+/* =====================================================
+   DISPLAY STUDENTS
+===================================================== */
 
-    if (confirm("ಈ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಅಳಿಸಬೇಕೇ?")) {
+function displayStudents(){
 
-        students.splice(index, 1);
+    const tbody =
+        document.getElementById(
+            "studentTable"
+        );
 
-        showMessage("ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಅಳಿಸಲಾಗಿದೆ.");
+
+    const search =
+        document.getElementById(
+            "search"
+        ).value.toLowerCase();
+
+
+    tbody.innerHTML = "";
+
+
+    const filtered =
+        students.filter(
+            function(student){
+
+                return student.name
+                    .toLowerCase()
+                    .includes(search);
+
+            }
+        );
+
+
+    document.getElementById(
+        "emptyMessage"
+    ).style.display =
+
+        filtered.length === 0
+        ? "block"
+        : "none";
+
+
+    filtered.forEach(
+        function(student,displayIndex){
+
+            const actualIndex =
+                students.indexOf(student);
+
+
+            const config =
+                getConfig(
+                    student.classNumber
+                );
+
+
+            tbody.innerHTML += `
+
+                <tr>
+
+                    <td>
+                        ${displayIndex + 1}
+                    </td>
+
+
+                    <td class="student-name">
+
+                        ${escapeHTML(
+                            student.name
+                        )}
+
+                    </td>
+
+
+                    <td>
+                        ${student.classNumber}
+                    </td>
+
+
+                    <td>
+
+                        <input
+                            class="mark-input"
+                            type="number"
+                            min="0"
+                            max="20"
+                            step="1"
+                            value="${student.original}"
+                            onchange="
+                                updateMarks(
+                                    ${actualIndex},
+                                    this.value
+                                )
+                            "
+                        >
+
+                    </td>
+
+
+                    <td class="converted">
+
+                        ${student.converted}/${config.maxMarks}
+
+                    </td>
+
+
+                    <td class="grade">
+
+                        ${student.grade}
+
+                    </td>
+
+
+                    <td class="action-cell no-print">
+
+                        <button
+                            class="btn-edit"
+                            onclick="
+                                editStudent(
+                                    ${actualIndex}
+                                )
+                            ">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="btn-delete"
+                            onclick="
+                                deleteStudent(
+                                    ${actualIndex}
+                                )
+                            ">
+
+                            Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE MARKS
+===================================================== */
+
+function updateMarks(index,value){
+
+    if(value === ""){
+
+        alert(
+            "ಅಂಕವನ್ನು ನಮೂದಿಸಿ."
+        );
 
         displayStudents();
+
+        return;
+
     }
+
+
+    const marks =
+        Number(value);
+
+
+    if(
+        isNaN(marks) ||
+        marks < 0 ||
+        marks > 20
+    ){
+
+        alert(
+            "ಅಂಕಗಳು 0 ರಿಂದ 20ರ ಒಳಗಿರಬೇಕು."
+        );
+
+        displayStudents();
+
+        return;
+
+    }
+
+
+    students[index].original =
+        marks;
+
+
+    students[index].converted =
+        convertMarks(
+            students[index].classNumber,
+            marks
+        );
+
+
+    students[index].grade =
+        calculateGrade(
+            students[index].classNumber,
+            students[index].converted
+        );
+
+
+    saveData();
+
+    displayStudents();
+
 }
 
 
-/* ಸಂದೇಶ */
-function showMessage(text) {
+/* =====================================================
+   EDIT STUDENT
+===================================================== */
 
-    let message = document.getElementById("message");
+function editStudent(index){
 
-    message.innerText = text;
+    const student =
+        students[index];
 
-    setTimeout(function() {
-        message.innerText = "";
-    }, 2000);
+
+    document.getElementById(
+        "studentName"
+    ).value =
+        student.name;
+
+
+    document.getElementById(
+        "classSelect"
+    ).value =
+        student.classNumber;
+
+
+    document.getElementById(
+        "marks20"
+    ).value =
+        student.original;
+
+
+    editIndex = index;
+
+
+    classChanged();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
 }
+
+
+/* =====================================================
+   DELETE STUDENT
+===================================================== */
+
+function deleteStudent(index){
+
+    if(
+        !confirm(
+            "ಈ ವಿದ್ಯಾರ್ಥಿಯ ಮಾಹಿತಿಯನ್ನು ಅಳಿಸಬೇಕೇ?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    students.splice(
+        index,
+        1
+    );
+
+
+    saveData();
+
+    displayStudents();
+
+}
+
+
+/* =====================================================
+   DELETE ALL
+===================================================== */
+
+function deleteAll(){
+
+    if(
+        !confirm(
+            "ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿಗಳ Data ಅಳಿಸಬೇಕೇ?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    students = [];
+
+
+    localStorage.removeItem(
+        "CCE_Marks"
+    );
+
+
+    displayStudents();
+
+}
+
+
+/* =====================================================
+   CLEAR INPUTS
+===================================================== */
+
+function clearInputs(){
+
+    document.getElementById(
+        "studentName"
+    ).value = "";
+
+
+    document.getElementById(
+        "marks20"
+    ).value = "";
+
+
+    editIndex = -1;
+
+}
+
+
+/* =====================================================
+   SAVE DATA
+===================================================== */
+
+function saveData(){
+
+    localStorage.setItem(
+        "CCE_Marks",
+        JSON.stringify(students)
+    );
+
+}
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData(){
+
+    const data =
+        localStorage.getItem(
+            "CCE_Marks"
+        );
+
+
+    if(data){
+
+        try{
+
+            students =
+                JSON.parse(data);
+
+        }
+
+        catch(error){
+
+            students = [];
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   CSV EXPORT
+===================================================== */
+
+function exportCSV(){
+
+    if(students.length === 0){
+
+        alert(
+            "Export ಮಾಡಲು ಯಾವುದೇ Data ಇಲ್ಲ."
+        );
+
+        return;
+
+    }
+
+
+    let csv =
+        "Sl.No,Student Name,Class,Original Marks /20,Converted Marks,CCE Grade\n";
+
+
+    students.forEach(
+        function(student,index){
+
+            const config =
+                getConfig(
+                    student.classNumber
+                );
+
+
+            csv +=
+
+                `${index + 1},` +
+
+                `"${student.name}",` +
+
+                `${student.classNumber},` +
+
+                `${student.original},` +
+
+                `${student.converted}/${config.maxMarks},` +
+
+                `${student.grade}\n`;
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            [
+                "\ufeff" + csv
+            ],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const a =
+        document.createElement("a");
+
+
+    a.href = url;
+
+
+    a.download =
+        "CCE_Marks_Report.csv";
+
+
+    document.body.appendChild(a);
+
+
+    a.click();
+
+
+    document.body.removeChild(a);
+
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+/* =====================================================
+   HTML SECURITY
+===================================================== */
+
+function escapeHTML(text){
+
+    return text
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   START APP
+===================================================== */
+
+loadData();
+
+classChanged();
+
+displayStudents();
 
 </script>
 
